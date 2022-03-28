@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Word500</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+    <link rel="shortcut icon" href="images/icon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <script src="word500.js"></script>
+</head>
+<!-- -->
+<body>
+    <div>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <img id="btnFlag" src="images/en.png" alt="Flag icon" width=36>
+            </button>
+            <div id="flagdropdown" class="dropdown-content">
+                <a id="flagen"><img src="images/en.png" alt="flag en icon" width="24"> English</a>
+                <a id="flagca"><img src="images/ca.png" alt="flag ca icon" width="24"> Català</a>
+                <a id="flagde"><img src="images/de.png" alt="flag de icon" width="24"> Deutsch</a>
+                <a id="flages"><img src="images/es.png" alt="flag es icon" width="24"> Español</a>
+                <a id="flagfr"><img src="images/fr.png" alt="flag fr icon" width="24"> Français</a>
+                <a id="flagit"><img src="images/it.png" alt="flag it icon" width="24"> Italiano</a>
+                <a id="flagnl"><img src="images/nl.png" alt="flag nl icon" width="24"> Nederlands</a>
+                <a id="flagpt"><img src="images/pt.png" alt="flag pt icon" width="24"> Português</a>
+            </div>
+        </div>
+        <!-- -->
+        <div class="dropdown2">
+            <button id="btn2" class="dropbtn">
+                <img id="btnLevel" src="images/A.png" alt="Difficulty level icon" width=36>
+            </button>
+
+            <div id="leveldropdown" class="dropdown-content">
+                <a id="levelA"><img src="images/A.png" alt="Standard level icon" width="24"> <b>Standard</b><ul><li>No repeating letters</li><li>No J, Q, X or Z</li></ul></a>
+                <a id="levelB"><img src="images/B.png" alt="Standard+ level icon" width="24"> <b>Standard+</b><ul><li>No repeating letters</li></ul></a>
+                <a id="levelC"><img src="images/C.png" alt="Advanced level icon" width="24"> <b>Advanced</b><ul><li>Anything goes!</li></ul></a>
+            </div>
+        </div>
+        <!-- -->
+
+        <div class="header">
+            <span class="middle">
+                <img src="images/logo.png" alt="word500 icon" height=48>
+            </span>
+            <span class="right">
+                <img src="images/help.png" alt="help icon" width=36>
+                <img src="images/stats.png" alt="stats icon" width=36>
+            </span>
+        </div>
+    </div>
+
+    <div id="divboard">
+    </div>
+
+    <br>
+    <br>
+
+    <div id="divkeyboard">
+    </div>
+
+    <br>
+
+    <div class="divmessageboard"></div>
+</body>
+</html>
