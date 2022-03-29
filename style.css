@@ -5,16 +5,20 @@
 
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
     background-color: #121213;
-    align-items: center;
 }
 hr {
-    width: 460px;
+    width: 460%;
 }
 
 div {
-	//*border: solid 1px #FFFFFF; *//
+    /* border: solid 1px #FFFFFF; */
+}
+
+h1 {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	color: #d3d3d3;
+	margin: auto;
 }
 
 nav {
@@ -40,18 +44,17 @@ nav ul li:hover ul {
 nav ul li a {
 	display: block;
 	font-family: arial;
-	color: FFFFFF;
-	font-size: 24;
+	color: #FFFFFF;
+	font-size: 24px;
 }
 nav ul li ul {
 	display: none;
 	position: absolute;
-	background-color: lightgray;
+	background-color: #d3d3d3;
 	border-radius: 0px 0px 4px 4px;
 }
 
 nav ul li ul li a {
-	padding: 20 10;
 	width: 150px;
 	text-decoration: none;
 	font-weight: bold;
@@ -67,7 +70,7 @@ nav ul li ul li p {
 }
 
 nav ul li ul li a:hover {
-	background-color: #888888;
+	background-color: #888888; /*Dark grey*/
 }
 
 .nav-left {
@@ -197,9 +200,9 @@ nav ul li ul li a:hover {
 
 /* Virtual keyboard */
 #divkeyboard {
-    width: 560px;
+    width: 580px;
     margin: 0 auto;
-    margin-top: 3px;
+    margin-top: 8px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -214,25 +217,25 @@ nav ul li ul li a:hover {
         font-weight: bold;
         font-size: 16px;
     }
-#divkeyboard button:nth-child(11),
-#divkeyboard button:nth-child(21),
-#divkeyboard button:nth-child(30) {
+#divkeyboard button:nth-child(12),
+#divkeyboard button:nth-child(22),
+#divkeyboard button:nth-child(31) {
     width: 60px;
 }
 
 #divkeyboard button:nth-child(1) {
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
-#divkeyboard button:nth-child(11) {
-    margin-left: 20px;
-}
-#divkeyboard button:nth-child(21) {
+#divkeyboard button:nth-child(12) {
     margin-left: 30px;
+}
+#divkeyboard button:nth-child(22) {
+    margin-left: 45px;
 }
 
 .specialKey {
-	margin-left: 10px !important;
+	margin-left: 20px !important;
 }
 
 .hiddenKey {
@@ -254,6 +257,7 @@ nav ul li ul li a:hover {
 
 .divmessageboard {
     width: 560px;
+	height: 50px;
     margin: 0 auto;
     margin-top: 3px;
     display: flex;

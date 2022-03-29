@@ -54,7 +54,7 @@ const pt4 = ['AAIUN', 'AARAO', 'ABABA', 'ABABE', 'ABACA', 'ABACE', 'ABACI', 'ABA
 //
 const height = 8; //number of guesses
 const width = 5; //number of characters
-const keys = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Hint', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Back', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Spec', 'Enter'];
+const keys = ['US','Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Hint', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Back', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Spec', 'Enter'];
 
 let row = 0; //current guess (attempt #)
 let col = 0; //current letter for that attempt
@@ -119,6 +119,8 @@ function initialize() {
 
 		if (key == 'Spec') {
 			configureSpecialKey();
+		} else if (key == 'US') {
+			buttonElement.textContent = '_';
 		} else {
 			buttonElement.textContent = key;
 		};
@@ -166,7 +168,11 @@ function initialize() {
 		if (e.keyCode == 199 || e.keyCode == 231) {
 			//Send Ç
 			addLetter(String.fromCharCode(199));
-		}
+			};
+			if (e.keyCode == 95) {
+				//Send underscore
+				addLetter(String.fromCharCode(95));
+			}
 	});
 
 	startGame();
@@ -448,7 +454,11 @@ const handleClick = (letter) => {
 		if (letter == 'Spec') {
 			addLetter(document.getElementById('Spec').textContent);
 			return;
-		}
+		};
+		if (letter == 'US') {
+			addLetter('_');
+			return;
+		};
 		addLetter(letter);
 	}
 };
@@ -464,7 +474,10 @@ const addLetter = (letter) => {
 			}
 			//Do we have a complete word?
 			if (col==width) {
-               let guess = readWord();
+				let guess = readWord();
+				if (guess.includes('_')) {
+					return;
+				};
 				if (!validWord(guess)) {
 			       for (let i = 0; i < width; i++) {
 				      let square = document.getElementById(row.toString() + '-' + i.toString());
@@ -634,13 +647,13 @@ const processEnter = () => {
 		localStorage.setItem(lang + level + 'gameover', 'Yes');
 		setTimeout(() => {
 			if (hintsUsed > 0) {
-				if (hintsUsed +1 == row) {
+				if (hintsUsed + 1 == row) {
 					showMessage('Mashing that Hints button is fun!');
-				} else if (hintsUsed ==1) {
-					showMessage('Solved! A pity you used that one hint :o');
+				} else if (hintsUsed == 1) {
+					showMessage('Solved! A pity you used that one hint');
 				}
 				else {
-					showMessage('Solved! Now try again, without hints :)');
+					showMessage('Solved! Now try again, without hints');
 				}
 			} else {
 				switch (row) {
@@ -661,21 +674,26 @@ const processEnter = () => {
 					case 7:
 						showMessage('Nice! That was close!'); break;
 				}
-			}
+			};
+			row += 1; //start new row
+			if (row == 1) {
+				validate('Hint');
+			};
 		}, 1500);
 		setTimeout(() => {
 			animateBoard();
 		}, 4000);
-	};
-	row += 1; //start new row
-	if (row == 1) {
-		validate('Hint');
+	} else {
+		row += 1; //start new row
+		if (row == 1) {
+			validate('Hint');
+		};
 	};
 	col = 0; //start at 0 for new row
 	if (!gameOver && row == height) {
 		gameOver = true;
 		localStorage.setItem(lang + level + 'gameover', 'Yes');
-		showMessage('Game over! The secret word was ' + word);
+		showMessage('Game over! The word was ' + word);
 	}
 };
 
@@ -719,10 +737,9 @@ function generateHint() {
 };
 
 const showMessage = (message) => {
-	const messageElement = document.createElement('p')
-	messageElement.textContent = message
-	document.querySelector('.divmessageboard').append(messageElement)
-	setTimeout(() => document.querySelector('.divmessageboard').removeChild(messageElement), 2500)
+	const title = document.getElementById('title');
+	title.innerText = message;
+	setTimeout(() => title.innerText = 'Word500', 2500)
 };
 
 const animateBoard = () => {
