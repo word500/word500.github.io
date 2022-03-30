@@ -437,6 +437,12 @@ const handleClick = (letter) => {
 		};
 		if (letter == 'Hint') {
 			if (row > 0) {
+				if (hintsUsed == 0) {
+					let answer = confirm('This will generate a random word, that fits your previous guesses.\r\nThe game will count as a loss and your streak resets to 0!\r\nDo you want to proceed, oh lazy one?');
+					if (!answer) {
+						return;
+					};
+				};
 				guesses[row] = generateHint();
 				writeWord(guesses[row], row);
 				col = 5;

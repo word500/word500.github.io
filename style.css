@@ -12,7 +12,7 @@ hr {
 }
 
 div {
-    /* border: solid 1px #FFFFFF; */
+   /* border: solid 1px #FFFFFF; */
 }
 
 h1 {
@@ -263,13 +263,186 @@ nav ul li ul li a:hover {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    /*height: 50px; */
 }
 
-    .divmessageboard p {
-        background-color: #818384;
-        border-radius: 10px;
-        padding: 10px;
+    .divmessageboard h1 {
+        background-color: #121213;
+        padding: 8px;
         margin: auto;
         font-size: 28px;
     }
+	
+/*                              */
+/* ADAPT TO SMALLER SCREEN SIZE */
+/*                              */
+
+	@media only screen and (max-height: 820px){
+		
+/*Playing board */
+#divboard {
+    width: 360px;
+    height: 370px;
+    margin: 0 auto;
+    margin-top: 1.5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tile {
+    border: 1.5px solid #d3d3d3; /*lightgray*/
+    width: 34px;
+    height: 40px;
+    margin: 2px;
+	margin-top: 1px;
+    color: #d3d3d3; /*lightgray*/
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Message board */
+.divmessageboard {
+    width: 500px;
+	height: 36px;
+    margin: 0 auto;
+    margin-top: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+    .divmessageboard h1 {
+        background-color: #121213;
+        padding: 5px;
+        margin: auto;
+        font-size: 28px;
+    }
+	
+	
+/* Virtual keyboard */
+#divkeyboard {
+    width: 480px;
+    margin: 0 auto;
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    #divkeyboard button {
+        width: 36px;
+        height: 44px;
+        border-radius: 3px;
+        border: outset 3px #a3a3a3;
+        background-color: #d3d3d3; /*lightgray*/
+        margin: 3px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+#divkeyboard button:nth-child(12),
+#divkeyboard button:nth-child(22),
+#divkeyboard button:nth-child(31) {
+    width: 50px;
+}
+
+#divkeyboard button:nth-child(1) {
+    margin-left: 10px;
+}
+
+#divkeyboard button:nth-child(12) {
+    margin-left: 20px;
+}
+#divkeyboard button:nth-child(22) {
+    margin-left: 30px;
+}
+.specialKey {
+	margin-left: 10px !important;
+	}
+	
+/*                                   */
+/* ADAPT TO MUCH SMALLER SCREEN SIZE */
+/*                                   */
+	@media only screen and (max-height: 640px){
+		
+/*Playing board */
+#divboard {
+    width: 330px;
+    height: 340px;
+    margin: 0 auto;
+    margin-top: 1.5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tile {
+    border: 1.5px solid #d3d3d3; /*lightgray*/
+    width: 30px;
+    height: 34px;
+    margin: 1px;
+	margin-top: 1px;
+    color: #d3d3d3; /*lightgray*/
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Message board */
+.divmessageboard {
+    width: 450px;
+	height: 28px;
+    margin: 0 auto;
+    margin-top: 1px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+    .divmessageboard h1 {
+        background-color: #121213;
+        padding: 2px;
+        margin: auto;
+        font-size: 20px;
+    }
+	
+	
+/* Virtual keyboard */
+#divkeyboard {
+    width: 450px;
+    margin: 0 auto;
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    #divkeyboard button {
+        width: 34px;
+        height: 42px;
+        border-radius: 3px;
+        border: outset 3px #a3a3a3;
+        background-color: #d3d3d3; /*lightgray*/
+        margin: 3px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+#divkeyboard button:nth-child(12),
+#divkeyboard button:nth-child(22),
+#divkeyboard button:nth-child(31) {
+    width: 50px;
+}
+
+#divkeyboard button:nth-child(1) {
+    margin-left: 10px;
+}
+
+#divkeyboard button:nth-child(12) {
+    margin-left: 20px;
+}
+#divkeyboard button:nth-child(22) {
+    margin-left: 30px;
+}
+.specialKey {
+	margin-left: 10px !important;
+	}
