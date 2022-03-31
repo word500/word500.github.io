@@ -85,7 +85,7 @@ function initialize() {
         }
 	}
 
-	// Create button dropdown listeners
+	// Create listeners
 	document.getElementById('flagen').addEventListener('click', () => flag_Click('en'));
 	document.getElementById('flages').addEventListener('click', () => flag_Click('es'));
 	document.getElementById('flagde').addEventListener('click', () => flag_Click('de'));
@@ -97,6 +97,8 @@ function initialize() {
 	document.getElementById('levelA').addEventListener('click', () => level_Click('A'));
 	document.getElementById('levelB').addEventListener('click', () => level_Click('B'));
 	document.getElementById('levelC').addEventListener('click', () => level_Click('C'));
+	document.getElementById('btnstats').addEventListener('click', () => stats_Click());
+	document.getElementById('closestatspage').addEventListener('click', () => stats_Close());
 
 	//localStorage.clear();
 
@@ -851,3 +853,97 @@ const animateBoard = () => {
         }
 	}
 };
+
+// STATS DIALOG STUFF
+
+const stats_Click = () => {
+	document.getElementById('statspage').style.display = 'block';
+	showstats();
+}
+
+const stats_Close = () => {
+	document.getElementById('statspage').style.display = 'none';
+}
+
+function showstats() {
+	let won = 0;
+	let lost = 0;
+	let mstreak = 0;
+	let cstreak = 0;
+	let number = [0,0,0,0,0,0,0,0,0];
+	let wstatus;
+	let winpercentage = 0;
+
+	//Retrieve stuff from localStorage
+	let level = localStorage.getItem('word500level');
+	if (level == null) {
+		level = 'A';
+	};
+
+	let lang = localStorage.getItem('word500lang');
+	if (lang == null) {
+		lang = 'en';
+	};
+	
+	let local = localStorage.getItem(lang + level + 'wins');
+	if (local !== null) {
+		won = parseInt(local);
+	};
+	
+	local = localStorage.getItem(lang + level + 'lost');
+	if (local !== null) {
+		lost = parseInt(local);
+	};
+
+	local = localStorage.getItem(lang + level + 'currentstreak');
+	if (local !== null) {
+		cstreak = parseInt(local);
+	};
+
+	local = localStorage.getItem(lang + level + 'maxstreak');
+	if (local !== null) {
+		mstreak = parseInt(local);
+	};
+	
+	let played = won + lost;
+	if (played==0) {
+		wstatus = "Word500 virgin"
+	} else if (played < 10) {
+		wstatus = "Word500 starter"
+	} else if (played < 25) {
+		wstatus = "Word500 adept"
+	} else if (played < 50) {
+		wstatus = "Word500 veteran"
+	} else if (played < 100) {
+		wstatus = "Word500 expert"
+	} else if (played < 1000) {
+		wstatus = "Word500 superstar"
+	} else {
+		wstatus = "Word500 bot or hacker (or both)"
+	};
+	
+	if (played > 0) {
+		winpercentage= (Math.round(1000*won/played)/10).toString() + '%';
+	}
+
+	for (let i = 1; i < 9; i++) {
+		let local = localStorage.getItem(lang + level + i.toString());
+		if (local == null) {
+			number[i] = 0;
+		} else {
+			number[i] = parseInt(local);
+		}
+	};
+	
+	for (let i = 1; i < 9; i++) {
+		document.getElementById('bartext' + i.toString()).innerText= number[i].toString();
+		document.getElementById('barfill' + i.toString()).style.width = Math.round(100*number[i]/won).toString() + '%'
+	}
+	document.getElementById('flag').src= 'images/' + lang + '.png';
+	document.getElementById('level').src= 'images/' + level + '.png';
+	document.getElementById('played').innerText = 'Games played: ' + played.toString();
+	document.getElementById('status').innerText = 'Status: ' + wstatus;
+	document.getElementById('win').innerText = 'Win percentage: ' + winpercentage;
+	document.getElementById('streak').innerText = 'Current streak: ' + cstreak.toString();
+	document.getElementById('max').innerText = 'Max streak: ' + mstreak.toString();
+}
