@@ -9,7 +9,7 @@ body {
 }
 
 hr {
-    width: 460%;
+    width: 100%;
 }
 
 div {
@@ -57,7 +57,7 @@ nav ul li ul {
 }
 
 nav ul li ul li a {
-	width: 150px;
+	width: 170px;
 	text-decoration: none;
 	font-weight: bold;
 	color: #000000;
@@ -68,7 +68,7 @@ nav ul li ul li a {
 nav ul li ul li p {
 	font-weight: normal;
 	color: #000000;
-	font-size: 14px
+	font-size: 12px
 }
 
 nav ul li ul li a:hover {

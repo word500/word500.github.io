@@ -200,6 +200,13 @@ const generateWordlist = () => {
 			words = en1.concat(en2, en3);
 		}
 		wordlist = en1.concat(en2, en3, en4);
+		let levela = '';
+		exclude.forEach(char => {
+			levela = levela + char;
+		});
+		document.getElementById('levelAtext').innerText = '- No repeat letters\n- No ' + levela;
+		document.getElementById('levelBtext').innerText = '- No repeat letters';
+		document.getElementById('levelCtext').innerText = '- Anything goes!';
 	};
 	if (lang == 'es') {
 		exclude = es0;
@@ -214,6 +221,13 @@ const generateWordlist = () => {
 			words = es1.concat(es2, es3);
 		}
 		wordlist = es1.concat(es2, es3, es4);
+		let levela = '';
+		exclude.forEach(char => {
+			levela = levela + char;
+		});
+		document.getElementById('levelAtext').innerText = '- Sin letras repetidas\n- Sin ' + levela;
+		document.getElementById('levelBtext').innerText = '- Sin letras repetidas';
+		document.getElementById('levelCtext').innerText = '- Todo es posible!';
 	};
 	if (lang == 'nl') {
 		exclude = nl0;
@@ -228,6 +242,13 @@ const generateWordlist = () => {
 			words = nl1.concat(nl2, nl3);
 		}
 		wordlist = nl1.concat(nl2, nl3, nl4);
+		let levela = '';
+		exclude.forEach(char => {
+			levela = levela + char;
+		});
+		document.getElementById('levelAtext').innerText = '- Zonder dubbele letters\n- Zonder ' + levela;
+		document.getElementById('levelBtext').innerText = '- Zonder dubbele letters';
+		document.getElementById('levelCtext').innerText = '- Alles kan!';
 	};
 	if (lang == 'ca') {
 		exclude = ca0;
@@ -242,6 +263,13 @@ const generateWordlist = () => {
 			words = ca1.concat(ca2, ca3);
 		}
 		wordlist = ca1.concat(ca2, ca3, ca4);
+		let levela = '';
+		exclude.forEach(char => {
+			levela = levela + char;
+		});
+		document.getElementById('levelAtext').innerText = '- Sense lletres repetides\n- Sense ' + levela;
+		document.getElementById('levelBtext').innerText = '- Sense lletres repetides';
+		document.getElementById('levelCtext').innerText = '- Tot es posible!';
 	};
 	if (lang == 'de') {
 		exclude = de0;
@@ -256,6 +284,13 @@ const generateWordlist = () => {
 			words = de1.concat(de2, de3);
 		}
 		wordlist = de1.concat(de2, de3, de4);
+		let levela = '';
+		exclude.forEach(char => {
+			levela = levela + char;
+		});
+		document.getElementById('levelAtext').innerText = '- 5 verschiedene Buchstaben\n- Ohne ' + levela;
+		document.getElementById('levelBtext').innerText = '- 5 verschiedene Buchstaben';
+		document.getElementById('levelCtext').innerText = '- Alles ist möglich!';
 	};
 	if (lang == 'fr') {
 		exclude=fr0;
@@ -270,6 +305,13 @@ const generateWordlist = () => {
 			words = fr1.concat(fr2, fr3);
 		}
 		wordlist = fr1.concat(fr2, fr3, fr4);
+		let levela = '';
+		exclude.forEach(char => {
+			levela = levela + char;
+		});
+		document.getElementById('levelAtext').innerText = '- Pas de lettres répétitives\n- Pas de ' + levela;
+		document.getElementById('levelBtext').innerText = '- Pas de lettres répétitives';
+		document.getElementById('levelCtext').innerText = '- Tout est possible!';
 	};
 	if (lang == 'pt') {
 		exclude = pt0;
@@ -284,6 +326,13 @@ const generateWordlist = () => {
 			words = pt1.concat(pt2, pt3);
 		}
 		wordlist = pt1.concat(pt2, pt3, pt4);
+		let levela = '';
+		exclude.forEach(char => {
+			levela = levela + char;
+		});
+		document.getElementById('levelAtext').innerText = '- Sem repetir letras\n- Sem ' + levela;
+		document.getElementById('levelBtext').innerText = '- Sem repetir letras';
+		document.getElementById('levelCtext').innerText = '- Tudo é possível!';
 	};
 	if (lang == 'it') {
 		exclude = it0;
@@ -298,6 +347,13 @@ const generateWordlist = () => {
 			words = it1.concat(it2, it3);
 		}
 		wordlist = it1.concat(it2, it3, it4);
+		let levela = '';
+		exclude.forEach(char => {
+			levela = levela + char;
+		});
+		document.getElementById('levelAtext').innerText = '- Senza lettere ripetute\n- Senza ' + levela;
+		document.getElementById('levelBtext').innerText = '- Senza lettere ripetute';
+		document.getElementById('levelCtext').innerText = '- Tutto è possibile!';
 	};
 };
 
