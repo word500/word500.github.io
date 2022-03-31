@@ -73,6 +73,7 @@ window.onload = function () {
 };
 
 function initialize() {
+	
     // Create game board
     for (let r = 0; r < height; r++) {
         for (let c = 0; c < width+3; c++) {
@@ -471,9 +472,9 @@ const handleClick = (letter) => {
 
 const addLetter = (letter) => {
 	if (col < width) {
-        let currTile = document.getElementById(row.toString() + '-' + col.toString());
-        if (currTile.innerText == '') {
-            currTile.innerText = letter;
+        let tile = document.getElementById(row.toString() + '-' + col.toString());
+        if (tile.innerText == '') {
+            tile.innerText = letter;
             col += 1;
 			if (col==1) {
 				validate('Back');
@@ -486,9 +487,9 @@ const addLetter = (letter) => {
 				};
 				if (!validWord(guess)) {
 			       for (let i = 0; i < width; i++) {
-				      let square = document.getElementById(row.toString() + '-' + i.toString());
-				      square.classList.remove('validWord');
-                      square.classList.add('invalidWord');
+				      let tile = document.getElementById(row.toString() + '-' + i.toString());
+				      tile.classList.remove('validWord');
+                      tile.classList.add('invalidWord');
 			       }
 				} else {
 					validate('Enter');
@@ -651,12 +652,48 @@ const processEnter = () => {
 	if (result == 500) {
 		gameOver = true;
 		localStorage.setItem(lang + level + 'gameover', 'Yes');
+		//Update statistics
+		if (hintsUsed > 0){
+			//LOSS
+			localStorage.setItem(lang + level + 'currentstreak', '0');
+			let losses = localStorage.getItem(lang + level + 'lost');
+			if (losses == null) {
+				localStorage.setItem(lang + level + 'lost', '1');
+			} else {
+				localStorage.setItem(lang + level + 'lost', (1 + parseInt(losses)).toString());
+			}
+		} else {
+			//WIN
+			let wins=localStorage.getItem(lang + level + 'wins');
+			if (wins == null) {
+				localStorage.setItem(lang + level + 'wins', '1');
+				localStorage.setItem(lang + level + 'currentstreak', '1');
+				localStorage.setItem(lang + level + 'maxstreak', '1');
+				localStorage.setItem(lang + level + (1 + row).toString(), '1');
+			} else {
+				let currentstreak = localStorage.getItem(lang + level + 'currentstreak');
+				let maxstreak = localStorage.getItem(lang + level + 'maxstreak');
+				let turnwins = localStorage.getItem(lang + level + (1 + row).toString());
+				localStorage.setItem(lang + level + 'wins', (1 + parseInt(wins)).toString());
+				localStorage.setItem(lang + level + 'currentstreak', (1 + parseInt(currentstreak)).toString());
+				if (currentstreak == maxstreak) {
+					localStorage.setItem(lang + level + 'maxstreak', (1 + parseInt(maxstreak)).toString());
+				};
+				if (turnwins == null) {
+					localStorage.setItem(lang + level + (1 + row).toString(), '1');
+				} else {
+					localStorage.setItem(lang + level + (1 + row).toString(), (1 + parseInt(turnwins)).toString());
+				}				
+			}
+		}
 		setTimeout(() => {
 			if (hintsUsed > 0) {
-				if (hintsUsed + 1 == row) {
+				alert(row);
+				alert(hintsUsed);
+				if (hintsUsed == row) {
 					showMessage('Mashing that Hints button is fun!');
 				} else if (hintsUsed == 1) {
-					showMessage('Solved! A pity you used that one hint');
+					showMessage('Solved! Pity you needed that one hint');
 				}
 				else {
 					showMessage('Solved! Now try again, without hints');
@@ -699,6 +736,14 @@ const processEnter = () => {
 	if (!gameOver && row == height) {
 		gameOver = true;
 		localStorage.setItem(lang + level + 'gameover', 'Yes');
+		//Update stats
+		localStorage.setItem(lang + level + 'currentstreak', '0');
+		let losses = localStorage.getItem(lang + level + 'lost');
+		if (losses == null) {
+			localStorage.setItem(lang + level + 'lost', '1');
+		} else {
+			localStorage.setItem(lang + level + 'lost', (1 + parseInt(losses)).toString());
+		}
 		showMessage('Game over! The word was ' + word);
 	}
 };
@@ -725,6 +770,19 @@ function calculate(word1, word2) {
 };
 
 function generateHint() {
+	//Verify if currently an invalid word is written
+	if (col=width) {
+		let guess = readWord();
+		if (!guess.includes('_')) {
+			if (!validWord(guess)) {
+				for (let i = 0; i < width; i++) {
+				let tile = document.getElementById(row.toString() + '-' + i.toString());
+				tile.classList.remove('invalidWord');
+				tile.classList.add('validWord');
+				}
+			}			
+		}
+	}
 	let hintFound = true;
 	for (let i = 0; i < words.length; i++) {
 		hintFound = true;
