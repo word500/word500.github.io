@@ -13,7 +13,7 @@ hr {
 }
 
 div {
-   /* border: solid 1px #FFFFFF; */
+   /*border: solid 1px #FFFFFF; */
 }
 
 h1 {
@@ -424,8 +424,8 @@ nav ul li ul li a:hover {
 
         /*Playing board */
         #divboard {
-            width: 330px;
-            height: 340px;
+            width: 360px;
+            height: 350px;
             margin: 0 auto;
             margin-top: 1.5px;
             display: flex;
@@ -434,9 +434,9 @@ nav ul li ul li a:hover {
 
         .tile {
             border: 1.5px solid #d3d3d3; /*lightgray*/
-            width: 30px;
-            height: 34px;
-            margin: 1px;
+            width: 35px;
+            height: 36px;
+            margin: 1.5px;
             margin-top: 1px;
             color: #d3d3d3; /*lightgray*/
             font-size: 24px;
@@ -474,7 +474,7 @@ nav ul li ul li a:hover {
         }
 
             #divkeyboard button {
-                width: 28px;
+                width: 29px;
                 height: 34px;
                 border-radius: 3px;
                 border: outset 3px #a3a3a3;
@@ -487,7 +487,7 @@ nav ul li ul li a:hover {
                 #divkeyboard button:nth-child(12),
                 #divkeyboard button:nth-child(22),
                 #divkeyboard button:nth-child(31) {
-                    width: 50px;
+                    width: 45px;
                 }
 
                 #divkeyboard button:nth-child(1) {
@@ -499,7 +499,7 @@ nav ul li ul li a:hover {
                 }
 
                 #divkeyboard button:nth-child(22) {
-                    margin-left: 30px;
+                    margin-left: 25px;
                 }
 
         .specialKey {
