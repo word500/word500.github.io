@@ -13,7 +13,7 @@ hr {
 }
 
 div {
-   border: solid 1px #FFFFFF;
+   /* border: solid 1px #FFFFFF; */
 }
 
 h1 {
@@ -81,8 +81,8 @@ nav ul li ul li a:hover {
 
 .nav-right {
     float: right;
-
 }
+
 .nav-mid {
     position: absolute;
 	margin-left: auto;
@@ -220,6 +220,7 @@ nav ul li ul li a:hover {
         font-weight: bold;
         font-size: 16px;
     }
+
 #divkeyboard button:nth-child(12),
 #divkeyboard button:nth-child(22),
 #divkeyboard button:nth-child(31) {
@@ -414,7 +415,7 @@ nav ul li ul li a:hover {
             margin: auto;
             font-size: 20px;
         }
-
+}
 
     /*                             */
     /* ADAPT TO NARROW SCREEN SIZE */
@@ -505,7 +506,6 @@ nav ul li ul li a:hover {
             margin-left: 10px !important;
         }
     }
-}
 
 	/* STUFF FOR STATS */
 	
