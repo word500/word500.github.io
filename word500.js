@@ -664,7 +664,6 @@ const processEnter = () => {
 			}
 		} else {
 			//WIN
-			alert("OK");
 			let wins=localStorage.getItem(lang + level + 'wins');
 			if (wins == null) {
 				localStorage.setItem(lang + level + 'wins', '1');
