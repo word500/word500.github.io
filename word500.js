@@ -664,6 +664,7 @@ const processEnter = () => {
 			}
 		} else {
 			//WIN
+			alert("OK");
 			let wins=localStorage.getItem(lang + level + 'wins');
 			if (wins == null) {
 				localStorage.setItem(lang + level + 'wins', '1');
@@ -688,8 +689,6 @@ const processEnter = () => {
 		}
 		setTimeout(() => {
 			if (hintsUsed > 0) {
-				alert(row);
-				alert(hintsUsed);
 				if (hintsUsed == row) {
 					showMessage('Mashing that Hints button is fun!');
 				} else if (hintsUsed == 1) {
