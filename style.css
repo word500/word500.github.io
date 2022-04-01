@@ -126,7 +126,7 @@ nav ul li ul li a:hover {
     #divboard .tile:nth-child(55),
     #divboard .tile:nth-child(63),
     #divboard .tile:nth-child(71) {
-        background-color: #dddd00; /* light yellow*/
+        background-color: rgba(221,221,0,1); /* light yellow*/
         color: #000000; /*black*/
     }
 
