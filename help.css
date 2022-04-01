@@ -11,7 +11,11 @@ body {
 hr {
     width: 100%;
 	margin-top: 15px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
+}
+.invisible {
+	border-color: #121213;
+	margin-top: 0;
 }
 
 div {
@@ -51,6 +55,10 @@ img {
 	margin-bottom: 10px;
 }
 
+.example {
+	margin: 5px 5px 5px 0;
+}
+
 ul li {
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	color: #d3d3d3;
@@ -58,7 +66,7 @@ ul li {
 	text-align:left;
 }
 
-@media only screen and (max-height: 820px) {
+@media only screen and (max-height: 820px) and (min-width: 600px) {
 	hr {
 		width: 100%;
 		margin-top: 8px;
@@ -86,10 +94,7 @@ ul li {
 	.p-bold {
 		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 		color: #d3d3d3;
-		margin: 0;
-		text-align: left;
 		font-weight: bold;
-		float: right;
 	}
 
 	img {
@@ -106,5 +111,41 @@ ul li {
 		color: #d3d3d3;
 		margin: 0;
 		text-align: left;
+	}
+}
+
+    /*                             */
+    /* ADAPT TO NARROW SCREEN SIZE */
+    /*                             */
+@media only screen and (max-width: 400px) {
+
+hr {
+		margin-top: 5px;
+		margin-bottom: 1px;
+}
+
+ul {
+	display: none;
+}
+
+div {
+	/* border: solid 1px #FFFFFF; */
+	width: 360px;
+	margin-top: 4px;
+	font-size: 12px;
+}
+
+	h1 {
+		font-size: 18px;
+	}
+
+
+	img {
+		margin-top: 6px;
+		margin-bottom: 4px;
+	}
+
+	.example {
+		height: 32px;
 	}
 }
