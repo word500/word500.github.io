@@ -1,0 +1,135 @@
+* {
+	padding: 0;
+	margin : 0;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #121213;
+}
+
+hr {
+    width: 100%;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+.invisible {
+	border-color: #121213;
+	margin-top: 0;
+}
+.btnclose:hover {
+  opacity: 0.7;
+}
+
+div {
+    /* border: solid 1px #FFFFFF; */
+	width: 500px;
+	display: flex;
+	margin: 0 auto;
+	margin-top: 5px;
+    flex-wrap: wrap;
+
+}
+
+h1 {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	color: #d3d3d3;
+	margin: auto;
+	text-align:center;
+}
+
+p {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	color: #d3d3d3;
+	margin: 0;
+	text-align:left;
+}
+
+.p-bold {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	color: #d3d3d3;
+	margin: auto;
+	text-align:left;
+	font-weight: bold;
+}
+
+img {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.example {
+	margin: 5px 5px 5px 0;
+}
+
+@media only screen and (max-height: 820px) and (min-width: 600px) {
+	hr {
+		margin-top: 8px;
+		margin-bottom: 2px;
+	}
+
+	div {
+		/* border: solid 1px #FFFFFF; */
+		width: 500px;
+		margin-top: 4px;
+		font-size: 14px;
+	}
+
+	h1 {
+		font-size: 24px;
+	}
+
+	p {
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		color: #d3d3d3;
+		margin: 0;
+		text-align: left;
+	}
+
+	.p-bold {
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		color: #d3d3d3;
+		font-weight: bold;
+	}
+
+	img {
+		margin-top: 10px;
+		margin-bottom: 5px;
+	}
+
+	.example {
+		height: 40px;
+	}
+}
+
+    /*                             */
+    /* ADAPT TO NARROW SCREEN SIZE */
+    /*                             */
+@media only screen and (max-width: 480px) {
+
+hr {
+		margin-top: 5px;
+		margin-bottom: 1px;
+}
+
+div {
+	/* border: solid 1px #FFFFFF; */
+	width: 360px;
+	margin-top: 4px;
+	font-size: 12px;
+}
+
+	h1 {
+		font-size: 18px;
+	}
+
+
+	img {
+		margin-top: 6px;
+		margin-bottom: 4px;
+	}
+
+	.example {
+		height: 32px;
+	}
+}
