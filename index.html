@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- v 1.1 -->
 <head>
 	<title>Word500</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0">
+	<meta name="description" content="Word500 is a Wordle variant for power players, created by Gabethebabe. Can you solve the daily puzzle?">
 	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="description" content="Word500 is a word game for power players, created by Gabethebabe. Can you solve the daily puzzle?">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="green">
+	<meta name="apple-mobile-web-app-title" content="Word500">
+	<meta name="msapplication-TileImage" content="/images/icon_144.png">
+	<meta name="msapplication-TileColor" content="green">
+	<link rel="manifest" href="manifest.json">
 	<link rel="shortcut icon" href="images/icon.png" type="image/png">
 	<link rel="shortcut icon" sizes="128x128" href="images/icon_128.png">
-	<link rel="apple-touch-icon" sizes="128x128" href="images/icon_128.png">
+	<link rel="shortcut icon" sizes="192x192" href="images/icon_192.png">
+	<link rel="apple-touch-icon" href="/images/icon_72.png" sizes="72x72">
+	<link rel="apple-touch-icon" href="/images/icon_96.png" sizes="96x96">
+	<link rel="apple-touch-icon" href="/images/icon_128.png" sizes="128x128">
+	<link rel="apple-touch-icon" href="/images/icon_144.png" sizes="144x144">
+	<link rel="apple-touch-icon" href="/images/icon_152.png" sizes="152x152">
+	<link rel="apple-touch-icon" href="/images/icon_192.png" sizes="192x192">
+	<link rel="apple-touch-icon" href="/images/icon_384.png" sizes="384x384">
+	<link rel="apple-touch-icon" href="/images/icon_512.png" sizes="512x512">	
 	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="images/icon_128.png">
 	<link rel="stylesheet" href="style.css">
+	<script src="word500.js"></script>
+	<script src="lettersoup1.js"></script>
+	<script src="lettersoup2.js"></script>
+	<script src="lettersoup3.js"></script>
+	<script src="lettersoup4.js"></script>
+	<script src="lettersoup5.js"></script>
+	<script src="lettersoup6.js"></script>
+	<script src="lettersoup7.js"></script>
+	<script src="lettersoup8.js"></script>
+	<script src="wordlist.js"></script>
 </head>
 
 <body>
@@ -48,7 +73,11 @@
 		<a id="helplink" href='#'><img id="help" src="images/help.png" alt="help icon" width=36></a>
 	</div>	
     </nav>
-    <hr>
 	<div class="divmessageboard"><h1 id="title">Welcome, stranger! Word500 was developed here, but has moved! Click the logo to navigate to word500.com. Bon voyage!</h1></div>
 </body>
+	<script>
+		if(navigator.serviceWorker) {
+		navigator.serviceWorker.register('sw.js');
+		]
+	</script>
 </html>
