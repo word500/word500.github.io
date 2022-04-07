@@ -27,15 +27,12 @@
 	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="images/icon_128.png">
 	<link rel="stylesheet" href="style.css">
 	<script src="word500.js"></script>
-	<script src="lettersoup1.js"></script>
-	<script src="lettersoup2.js"></script>
-	<script src="lettersoup3.js"></script>
-	<script src="lettersoup4.js"></script>
-	<script src="lettersoup5.js"></script>
-	<script src="lettersoup6.js"></script>
-	<script src="lettersoup7.js"></script>
-	<script src="lettersoup8.js"></script>
 	<script src="wordlist.js"></script>
+	<script>
+		if(navigator.serviceWorker) {
+		navigator.serviceWorker.register('sw.js');
+		}
+	</script>
 </head>
 
 <body>
@@ -75,9 +72,4 @@
     </nav>
 	<div class="divmessageboard"><h1 id="title">Welcome, stranger! Word500 was developed here, but has moved! Click the logo to navigate to word500.com. Bon voyage!</h1></div>
 </body>
-	<script>
-		if(navigator.serviceWorker) {
-		navigator.serviceWorker.register('sw.js');
-		]
-	</script>
 </html>
