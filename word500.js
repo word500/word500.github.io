@@ -115,7 +115,7 @@ function initialize() {
 
 	// Listen for Enter/Backspace on physical keyboard
 	document.addEventListener('keyup', (e) => {
-		alert(e.code)
+
 		if (gameOver) return;
 
 		if (e.code == 'Backspace') {
