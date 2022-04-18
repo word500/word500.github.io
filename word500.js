@@ -129,7 +129,7 @@ function initialize() {
 		// Listen for letters on physical keyboard
 		document.addEventListener('keypress', (e) => {
 		if (gameOver) return;
-
+alert(e.keyCode);
         //Uppercase A-Z
 		if (65 <= e.keyCode && e.keyCode <= 90) {
 			//send this letter
