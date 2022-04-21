@@ -37,7 +37,7 @@
 	<script src="wordlist_2204.js"></script>
 	<script>
 		if(navigator.serviceWorker) {
-		navigator.serviceWorker.register('sw_refresh.js');
+		navigator.serviceWorker.register('sw.js');
 		}
 	</script>
 </head>
@@ -69,6 +69,13 @@
 					<li id="levelC"><a href='#'><img src="images/C.png" alt="Advanced level" width=24> Advanced<p id="levelCtext">- Anything goes!</p></a></li>			
 				</ul>
 			</li>
+			<li><a href='#'><img id="btnMode" src="images/modeA.png" alt="Current mode" width=36></a>
+				<ul>
+					<li id="modeA"><a href='#'><img src="images/modeA.png" alt="Daily Word500" width=24> Daily puzzle</a></li>
+					<li id="modeB"><a href='#'><img src="images/modeB.png" alt="Timed" width=24> Timed (5min)</a></li>
+					<li id="modeC"><a href='#'><img src="images/modeC.png" alt="Speedrun" width=24> Speedrun (10)</a></li>			
+				</ul>
+			</li>
 		</ul>
 	</div>
 
@@ -90,6 +97,8 @@
 		<p id="win">Win percentage:</p>
 		<p id="streak">Current streak:</p>
 		<p id="max">Max streak:</p>
+		<p id="timed">Timed PR:</p>
+		<p id="speedrun">Speedrun PR:</p>
 		<h2>Guess distribution</h2>
 		<span class="number">1</span>
 		<div class="progress">

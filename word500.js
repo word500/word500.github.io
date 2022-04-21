@@ -14,13 +14,18 @@ const images = ['[img]https://i.imgur.com/0c2lKKh.png[/img]', '[img]https://i.im
 let row = 0; //current guess (attempt #)
 let col = 0; //current letter for that attempt
 let gameOver = false;
+let gameRunning;
+let gameStart;
+let gamesWon;
 let hintsUsed = 0;
 let lang;  // en=English, es=Spanish, fr=French, de=German, nl=Dutch, it=Italian, ca=Catalan, pt=Portuguese
-let level; // A=Standard, B=Standard+, C=Advanced.
+let level; // A=Standard, B=Standard+, C=Advanced
+let mode = 'A'; // A=Daily, B=Timed, C=Speedrun
 let exclude;
 let word;
 let words;
 let wordlist;
+let stopwatch;
 let guesses = ['', '', '', '', '', '', '', '', '', ''];
 let months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV','DEC'];
 
@@ -29,6 +34,7 @@ window.onload = function () {
 };
 
 function initialize() {
+
     // Create game board
     for (let r = 0; r < height; r++) {
         for (let c = 0; c < width+3; c++) {
@@ -73,10 +79,11 @@ function initialize() {
 		lang = 'en';
 	}
 
-	generateWordlist();
+	gwl(); //generateWordlist
 	rg(); //ResetGame
-	changeLevel(level);
+	cle(level); //changeLevel
 	changeLanguage(lang);
+	changeMode('A');
 	l1ll1(); //Togglekeys
 
 	let d = new Date();
@@ -89,7 +96,7 @@ function initialize() {
 		word = llll1(localStorage.getItem(lang + level + 'word')); //Decrypt
 	} else if (today == lastDate) {
 		// SAME DAY
-		restoreSession();
+		rtr(); //restoreSession
 	} else {
 		//NEW DAY!
 		ll1ll(); //ClearCache
@@ -110,12 +117,14 @@ function initialize() {
 	document.getElementById('levelA').addEventListener('click', () => level_Click('A'));
 	document.getElementById('levelB').addEventListener('click', () => level_Click('B'));
 	document.getElementById('levelC').addEventListener('click', () => level_Click('C'));
+	document.getElementById('modeA').addEventListener('click', () => mode_Click('A'));
+	document.getElementById('modeB').addEventListener('click', () => mode_Click('B'));
+	document.getElementById('modeC').addEventListener('click', () => mode_Click('C'));
 	document.getElementById('btnstats').addEventListener('click', () => stats_Click());
 	document.getElementById('closestatspage').addEventListener('click', () => stats_Close());
 
 	// Listen for Enter/Backspace on physical keyboard
 	document.addEventListener('keyup', (e) => {
-
 		if (gameOver) return;
 
 		if (e.code == 'Backspace') {
@@ -129,7 +138,7 @@ function initialize() {
 		// Listen for letters on physical keyboard
 		document.addEventListener('keypress', (e) => {
 		if (gameOver) return;
-alert(e.keyCode);
+
         //Uppercase A-Z
 		if (65 <= e.keyCode && e.keyCode <= 90) {
 			//send this letter
@@ -153,14 +162,14 @@ alert(e.keyCode);
 			//Send Ç
 			lll11(String.fromCharCode(199)); //AddLetter
 			}
-			if (e.keyCode == 95) {
+			if (e.keyCode == 95 || e.keyCode == 45) {
 				//Send underscore
 				lll11(String.fromCharCode(95)); //AddLetter
 			}
 	});
 }
 
-const generateWordlist = () => {
+const gwl = () => { //generateWordlist
 	//Concatenate lettersoups
 	if (lang == 'en') {
 		exclude = en0;
@@ -289,7 +298,7 @@ const l1ll1 = () => { //Togglekeys
 	}
 }
 
-const restoreSession = () => {
+const rtr = () => { //restoreSession
 	word = llll1(localStorage.getItem(lang + level + 'word')); //Decrypt
 	hintsUsed = parseInt(localStorage.getItem(lang + level + 'hints'));
 	if (localStorage.getItem(lang + level + 'gameover') == 'Yes') {
@@ -309,7 +318,7 @@ const restoreSession = () => {
 		} else {
 			//Repopulate guesses into the board
 			wwd(guesses[i], i); //Write Word
-			writeResult(l1l11(guesses[i], word), i); //Calculate
+			wru(l1l11(guesses[i], word), i); //writeResult, Calculate
 			invalidateLetters(i);
 		}
 	}
@@ -397,7 +406,7 @@ const handleClick = (letter) => {
 			return;
 		}
 		if (letter == 'Hint') {
-			if (row > 0) {
+			if (row > 0 && mode == 'A') {
 				if (hintsUsed == 0) {
 					let answer = confirm('This will generate a random word, that fits your previous guesses.\r\nThe game will count as a loss and your streak resets to 0!\r\nDo you want to proceed, oh lazy one?');
 					if (!answer) {
@@ -430,6 +439,12 @@ const handleClick = (letter) => {
 }
 
 const lll11 = (letter) => { //Addletter
+	// Start the clock if this is the first character of a timed game
+	if (!gameRunning && !(mode == 'A')) {
+		gameRunning = true;
+		gameStart = new Date();
+		stopwatch = setInterval(ti, 1000);
+	}
 	if (col < width) {
         let tile = document.getElementById(row.toString() + '-' + col.toString());
         if (tile.innerText == '') {
@@ -463,10 +478,11 @@ const flag_Click = (country) => {
 		return;
 	}
 	changeLanguage(country);
-	generateWordlist();
-	rg();
+	gwl(); //generateWordlist
+	rg(); // Reset Game
 	l1ll1(); //Togglekeys
-	restoreSession();
+	rtr(); //restoreSession
+	stats_Close();
 }
 
 const changeLanguage = (country) => {
@@ -565,17 +581,67 @@ const level_Click = (char) => {
 		// Do nothing if level does not change
 		return;
 	}
-	generateWordlist();
-	changeLevel(char);
+	gwl(); //generateWordlist
+	cle(char); //changeLevel
 	rg(); //ResetGame
 	l1ll1(); //Togglekeys
-	restoreSession();
+	rtr(); //restoreSession
+	stats_Close();
 }
 
-const changeLevel = (char) => {
+const cle = (char) => { //changeLevel
 	document.getElementById('btnLevel').src = 'images/' + char + '.png';
 	level = char;
 	localStorage.setItem('word500level', level);
+}
+
+const mode_Click = (char) => {
+	if (mode == char) {
+		// Do nothing if mode does not change
+		return;
+	}
+	changeMode(char);
+	rg(); //ResetGame
+	clearInterval(stopwatch);
+	l1ll1(); //Togglekeys
+	if (mode == 'A') {
+		rtr(); //restoreSession
+		document.getElementById('title').innerText = 'Word500'
+	};
+	if (mode == 'B') {
+		startTimed();
+	};
+	if (mode == 'C') {
+		startSpeedrun();
+	};
+}
+
+const startTimed = () => {
+	let pr = localStorage.getItem(lang + level + 'timed');
+	if (pr == null) {
+		alert('Play a timed practice game\nYou have 5 minutes\nAnimations are turned off\nDo not refresh your browser!');
+	}
+	document.getElementById('title').innerText = '00:00';
+	word = llll1(words[Math.ceil(words.length * Math.random())]);
+	console.log(word); //TEMP
+	gameRunning=false;
+}
+
+const startSpeedrun = () => {
+	let pr = localStorage.getItem(lang + level + 'speedrun');
+	if (pr == null) {
+		alert('Play 10 games ASAP\nAnimations are turned off\nDo not refresh your browser\nBeware of fried brains!');
+	}
+	document.getElementById('title').innerText = '00:00 (0/10)';
+	word = llll1(words[Math.ceil(words.length * Math.random())]);
+	console.log(word); //TEMP
+	gamesWon = 0;
+	gameRunning=false;
+}
+
+const changeMode = (char) => {
+	document.getElementById('btnMode').src = 'images/mode' + char + '.png';
+	mode = char;
 }
 
 const l1lll = (letter) => { //Invalidate
@@ -607,40 +673,32 @@ const wwd = (newWord, rowNumber) => { //WriteWord
 	}
 }
 
-const writeResult = (result, rowNumber) => {
-	let k = width;
-	let tile = document.getElementById(rowNumber.toString() + '-' + k.toString());
-	tile.classList.add('flip');
-	setTimeout(() => {
-		tile.innerText = Math.floor(result / 100).toString();
-	}, 250);
-	setTimeout(() => {
-		tile.classList.remove('flip');
-	}, 500);
-
-	k += 1;
-	let tile2 = document.getElementById(rowNumber.toString() + '-' + k.toString());
-	setTimeout(() => {
-		tile2.classList.add('flip');
-	}, 500);
-	setTimeout(() => {
-		tile2.innerText = Math.floor((result % 100) / 10).toString();
-	}, 750);
-	setTimeout(() => {
-		tile2.classList.remove('flip');
-	}, 1000);
-
-	k += 1;
-	let tile3 = document.getElementById(rowNumber.toString() + '-' + k.toString());
-	setTimeout(() => {
-		tile3.classList.add('flip');
-	}, 1000);
-	setTimeout(() => {
-		tile3.innerText = (result % 10).toString();
-	}, 1250);
-	setTimeout(() => {
-		tile3.classList.remove('flip');
-	}, 1500);
+const wru = (result, rowNumber) => { //writeResult
+	if (result > 100) {
+		result = result.toString();
+	} else if (result > 10) {
+		result = '0' + result.toString();
+	} else {
+		result='005'
+	}
+	if (mode == 'A') {
+	for (let k = width; k < width+3; k++) {
+		let tile = document.getElementById(rowNumber.toString() + '-' + k.toString());
+		setTimeout(() => {
+			tile.classList.add('flip');
+		}, 500*(k-width));
+		setTimeout(() => {
+			tile.innerText = result[k-width];
+		}, 500*(k-width)+250);
+		setTimeout(() => {
+			tile.classList.remove('flip');
+		}, 500*(k-width)+500);
+	}		
+	} else {
+		for (let k = width; k < width+3; k++) {
+		document.getElementById(rowNumber.toString() + '-' + k.toString()).innerText = result[k-width];
+		}	
+	}
 }
 
 function rw() { //Read word from current line
@@ -686,19 +744,29 @@ const ll11l = () => { //ProcessEnter
 		return;
 	}
 	//Word is valid!!
+	let result = (l1l11(word, guess)); //Calculate
+	
+	//First timed guess shenanigans
+	while (mode == 'B' && row == 0 && ((result < 10) || (result > 205) || (result == 41))){
+		word = llll1(words[Math.ceil(words.length * Math.random())]);
+		result = (l1l11(word, guess)); //Calculate
+	}
+	
 	invalidateLetters(row);
 	guesses[row] = guess;
-	localStorage.setItem(lang + level + 'guess' + row.toString(), guess);
-
+	if (mode == 'A') {
+		localStorage.setItem(lang + level + 'guess' + row.toString(), guess);
+	}
 	l1lll('Back'); //Invalidate
 	l1lll('Enter'); //Invalidate
-	let result = (l1l11(word, guess)); //Calculate
-	writeResult(result, row);
+	wru(result, row); //writeResult
 	if (result == 500) {
-		gameOver = true;
-		localStorage.setItem(lang + level + 'gameover', 'Yes');
+		if (mode == 'A') {
+			gameOver = true;
+			localStorage.setItem(lang + level + 'gameover', 'Yes');
+		}
 		//Update statistics
-		if (hintsUsed > 0){
+		if (hintsUsed > 0 && mode == 'A'){
 			//LOSS
 			localStorage.setItem(lang + level + 'currentstreak', '0');
 			let losses = localStorage.getItem(lang + level + 'lost');
@@ -707,7 +775,7 @@ const ll11l = () => { //ProcessEnter
 			} else {
 				localStorage.setItem(lang + level + 'lost', (1 + parseInt(losses)).toString());
 			}
-		} else {
+		} else if (mode == 'A') {
 			//WIN
 			let wins=localStorage.getItem(lang + level + 'wins');
 			if (wins == null) {
@@ -730,7 +798,47 @@ const ll11l = () => { //ProcessEnter
 					localStorage.setItem(lang + level + (1 + row).toString(), (1 + parseInt(turnwins)).toString());
 				}				
 			}
+		} else if(mode == 'B') {
+			// FINISH TIMED GAME
+			let d = new Date();
+			let iresult = d - gameStart;
+			clearInterval(stopwatch);
+			document.getElementById('title').innerText = writetime(iresult, true);
+			gameOver = true;
+			gameRunning=false;
+			let oldResult = localStorage.getItem(lang + level + 'timed');
+			if (oldResult == null) {
+				localStorage.setItem(lang + level + 'timed',iresult.toString());
+			} if (iresult < oldResult) {
+				alert('New personal best!');
+				localStorage.setItem(lang + level + 'timed',iresult.toString());
+			}
+			return;
+		} else if(mode == 'C') {
+			gamesWon +=1;
+			if (gamesWon == 10) {
+				//FINISH SPEEDRUN GAME
+				let d = new Date();
+				let iresult = d - gameStart;
+				clearInterval(stopwatch);
+				document.getElementById('title').innerText = writetime(iresult, true);
+				gameOver = true;
+				let oldResult = localStorage.getItem(lang + level + 'speedrun');
+				if (oldResult == null) {
+					localStorage.setItem(lang + level + 'speedrun',iresult.toString());
+				} if (iresult < oldResult) {
+					alert('New personal best!');
+					localStorage.setItem(lang + level + 'speedrun',iresult.toString());
+				}
+			} else {
+				document.getElementById('title').innerText = (document.getElementById('title').innerText).substring(0,7) + gamesWon.toString() + '/10)';
+				rg(); //ResetGame;
+				word = llll1(words[Math.ceil(words.length * Math.random())]);
+				console.log(word);	//TEMP	
+			}
+			return;
 		}
+		//More stuff, for normal games only
 		setTimeout(() => {
 			if (hintsUsed > 0) {
 				if (hintsUsed == row) {
@@ -770,13 +878,15 @@ const ll11l = () => { //ProcessEnter
 			ab(); //AnimateBoard
 		}, 4000);
 	} else {
+		// The word was not correct
 		row += 1; //start new row
-		if (row == 1) {
+		if (row == 1  && mode == 'A'){
 			l1l1l('Hint'); //Validate
 		}
 	}
 	col = 0; //start at 0 for new row
-	if (!gameOver && row == height) {
+	
+	if (!gameOver && row == height && mode == 'A') {
 		gameOver = true;
 		localStorage.setItem(lang + level + 'gameover', 'Yes');
 		//Update stats
@@ -788,6 +898,16 @@ const ll11l = () => { //ProcessEnter
 			localStorage.setItem(lang + level + 'lost', (1 + parseInt(losses)).toString());
 		}
 		sm('Game over! The word was ' + word);
+		ab();
+	} else if (!gameOver && row == height && mode == 'C') {
+		rg(); //ResetGame;
+		word = llll1(words[Math.ceil(words.length * Math.random())]);
+		console.log(word);	//TEMP		
+	} else if (!gameOver && row == height && mode == 'B') {
+		gameOver = true;
+		clearInterval(stopwatch);
+		sm('Game over! The word was ' + word);
+		ab();
 	}
 }
 
@@ -913,8 +1033,6 @@ const ab = () => { //AnimateBoard
 	}
 }
 
-// STATS DIALOG STUFF
-
 const stats_Click = () => {
 	document.getElementById('statspage').style.display = 'block';
 	showstats();
@@ -939,6 +1057,8 @@ function showstats() {
 	let number = [0,0,0,0,0,0,0,0,0];
 	let wstatus;
 	let winpercentage = 0;
+	let timed = 'N/A'
+	let speedrun = 'N/A'
 
 	//Retrieve stuff from localStorage
 	let level = localStorage.getItem('word500level');
@@ -969,6 +1089,16 @@ function showstats() {
 	local = localStorage.getItem(lang + level + 'maxstreak');
 	if (local !== null) {
 		mstreak = parseInt(local);
+	};
+
+	local = localStorage.getItem(lang + level + 'timed');
+	if (local !== null) {
+		timed = writetime(parseInt(local),true);
+	};
+
+	local = localStorage.getItem(lang + level + 'speedrun');
+	if (local !== null) {
+		speedrun = writetime(parseInt(local),true);
 	};
 	
 	let played = won + lost;
@@ -1012,6 +1142,8 @@ function showstats() {
 	document.getElementById('win').innerText = 'Win percentage: ' + winpercentage;
 	document.getElementById('streak').innerText = 'Current streak: ' + cstreak.toString();
 	document.getElementById('max').innerText = 'Max streak: ' + mstreak.toString();
+	document.getElementById('timed').innerText = 'Timed PR: ' + timed;
+	document.getElementById('speedrun').innerText = 'Speedrun PR: ' + speedrun;
 }
 
 function l11ll(input) { //Encrypt
@@ -1039,7 +1171,6 @@ function cd() { //countDown
 	sec = (60 - sec) % 60;
 	min = (60 - min - Math.ceil(sec / 60)) % 60;
 	hour = 24 - hour - Math.ceil((sec + min) / 120);
-	//alert(hour + ':' + min + ':' + sec);
 	if (hour < 10) {
 		timeLeft = '0' + hour.toString();
 	} else {
@@ -1060,6 +1191,48 @@ function cd() { //countDown
 	} else {
 		document.getElementById('timer').innerText = '';
 	}
+}
+
+function ti() { //Timer
+	let d = new Date();
+	let running = d - gameStart;
+	let min = Math.floor(running/60000);
+	if (mode == 'B' && min == 5){
+		gameOver=true;
+		document.getElementById('title').innerText = 'Time is up! The word was ' + word;
+		clearInterval(stopwatch);
+	} else if (mode == 'B') {
+		document.getElementById('title').innerText = writetime(running,false)
+	} else {
+		document.getElementById('title').innerText = writetime(running,false) + ' (' + gamesWon.toString() + '/10)'
+	}
+}
+
+function writetime(itime,ms){
+		let sTimer;
+		let min = Math.floor(itime/60000);
+		if (min < 10) {
+			sTimer = '0' + min.toString();
+		} else {
+			sTimer = min.toString();
+		}
+		let sec = Math.floor(itime/1000) % 60;
+		if (sec < 10) {
+			sTimer = sTimer + ':0' + sec.toString();
+		} else {
+			sTimer = sTimer + ':' + sec.toString();
+		}
+		if (ms) {
+			let millis = itime % 1000;
+			if (millis > 99) {
+				sTimer = sTimer + '.' + millis.toString();
+			} else if (millis > 9) {
+				sTimer = sTimer + '.0' + millis.toString();
+			} else {
+				sTimer = sTimer + '.00' + millis.toString();
+			}
+		}
+		return sTimer;
 }
 
 function cc(m) {
