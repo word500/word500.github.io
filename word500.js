@@ -934,7 +934,7 @@ function l1l11(word1, word2) { //Calculate
 
 function llll1(input) { //decrypt
 	let z = '';
-	let j;
+	let j;alert(input);
 	for (let i = 0; i < 5; i++) {
 		j = input.charCodeAt(i);
 		if ( j > 100) {
