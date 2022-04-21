@@ -92,13 +92,16 @@ function initialize() {
 	if (lastDate == null) {
 		// FIRST TIMER
 		localStorage.setItem('word500date', today);
+		console.log('Getting words');
 		ll1l1(today); //GetWords
 		word = llll1(localStorage.getItem(lang + level + 'word')); //Decrypt
 	} else if (today == lastDate) {
 		// SAME DAY
+		console.log('Restoring session');
 		rtr(); //restoreSession
 	} else {
 		//NEW DAY!
+		console.log('Getting new words');
 		ll1ll(); //ClearCache
 		ll1l1(today);
 		localStorage.setItem('word500date', today);
@@ -934,7 +937,7 @@ function l1l11(word1, word2) { //Calculate
 
 function llll1(input) { //decrypt
 	let z = '';
-	let j;alert(input);
+	let j;
 	for (let i = 0; i < 5; i++) {
 		j = input.charCodeAt(i);
 		if ( j > 100) {
