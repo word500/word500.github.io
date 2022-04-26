@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Last update: 21-04-2022 -->
 	<title>Word500</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0">
@@ -39,6 +40,14 @@
 		if(navigator.serviceWorker) {
 		navigator.serviceWorker.register('sw.js');
 		}
+	</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-J03133WL41"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-J03133WL41');
 	</script>
 </head>
 
@@ -80,8 +89,9 @@
 	</div>
 
 	<div class="nav-right">
+		<a href='#'><img id="btnconstruct" src="images/modeD.png" alt="construct icon" width=36></a>
 		<a href='#'><img id="btnstats" src="images/stats.png" alt="stats icon" width=36></a>
-		<a id="helplink" href='help.html'><img id="help" src="images/help.png" alt="help icon" width=36></a>
+		<a id="helplink" href='helpen.html'><img id="help" src="images/help.png" alt="help icon" width=36></a>
 	</div>	
     </nav>
     <hr>
@@ -147,6 +157,14 @@
 		<button onclick="cc('I');">BBCode</button>
 		</div>
 		<h3 id="timer">Next Word500 in 00:00:00</h3>
+	</div>
+	
+	<div id="createlink" class="modal">
+		<h2>Create custom puzzle</h2>
+		<a href='#'><img class="closelink" id="closelinkpage" src="images/close.png" alt="close button" width=24></a>
+		<p><br>This button creates a custom puzzle using the current language and the first word typed in the game board.<br><br>You can send the provided URL to (a) friend(s), so that they play your secret word.<br><br>You are able to use words from the extended (allowed guesses) list, which has more words than the list that is normally used by Word500.<br><br></p>
+		<p id="customwordlabel">TEST</p><p><br></p>
+		<textarea id="customword" autofocus readonly rows="2" cols="25"></textarea>
 	</div>
 </body>
 </html>
