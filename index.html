@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Last update: 28-04-2022 -->
+	<!-- Last update: 29-04-2022 17:30 CET -->
 	<title>Word500</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale = 1.0">
@@ -25,8 +25,9 @@
 	<link rel="apple-touch-icon" href="/images/icon_384.png" sizes="384x384">
 	<link rel="apple-touch-icon" href="/images/icon_512.png" sizes="512x512">	
 	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="images/icon_128.png">
-	<link rel="stylesheet" href="style_220426.css">
-	<script src="word500_220428.js"></script>
+	<link rel="stylesheet" href="style_220428.css">
+	<script src="word500_220429.js"></script>
+	<script src="wordlist_2205_1.js"></script>
 	<script src="lettersoup1.js"></script>
 	<script src="lettersoup2.js"></script>
 	<script src="lettersoup3.js"></script>
@@ -35,10 +36,9 @@
 	<script src="lettersoup6.js"></script>
 	<script src="lettersoup7.js"></script>
 	<script src="lettersoup8.js"></script>
-	<script src="wordlist_2204.js"></script>
 	<script>
 		if(navigator.serviceWorker) {
-		navigator.serviceWorker.register('sw_refresh.js');
+		navigator.serviceWorker.register('sw.js');
 		}
 	</script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -100,6 +100,13 @@
     <div id="divkeyboard"></div>
 
 	<div id="statspage" class="modal">
+		<a href="https://www.buymeacoffee.com/word500" target="_blank">
+			<div class="support">
+				<div class="supporttext">Support<br>Word500</div>
+				<img src="images/support.png" width=24 alt="Support Word500!">
+			</div>
+		</a>
+		
 		<h1>Statistics <img id="flag" src="images/en.png" alt="Flag icon" width=24><img id="level" src="images/A.png" alt="level icon" width=24></h1>
 		<a href='#'><img class="closestats" id="closestatspage" src="images/close.png" alt="close button" width=24></a>
 		<p id="played">Games played:</p>
@@ -109,6 +116,9 @@
 		<p id="max">Max streak:</p>
 		<p id="timed">Timed PR:</p>
 		<p id="speedrun">Speedrun PR:</p>
+		
+
+		
 		<h2>Guess distribution</h2>
 		<span class="number">1</span>
 		<div class="progress">
